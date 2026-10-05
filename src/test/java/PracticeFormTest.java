@@ -3,7 +3,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 
 public class PracticeFormTest {
@@ -13,7 +12,6 @@ public class PracticeFormTest {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.timeout = 5000;
         Configuration.headless = false;
     }
     @Test
@@ -22,33 +20,33 @@ public class PracticeFormTest {
         $("#firstName").setValue("Nikolai");
         $("#lastName").setValue("Patrakov");
         $("#userEmail").setValue("testguru@auto.com").pressTab();
-        $(byText("Male")).click();
+        $("#genterWrapper").$(byText("Male")).click();
         $("#userNumber").setValue("0123456789");
         $("#dateOfBirthInput").click();
         $("[class=react-datepicker__month-select]").selectOptionByValue("2");
         $("[class=react-datepicker__year-select]").selectOptionByValue("1991");
-        $(byXpath("//div[contains(@aria-label, \"March 20\")]")).click();
-        $("#subjectsInput").click();
-        $("#subjectsInput").setValue("e").pressTab();
-        $(byText("Reading")).click();
-        $("#uploadPicture").sendKeys("C:\\Users\\Administrator\\qaGuruReps\\secondHW\\src\\test\\resources\\test-picture.jpg");
+        $(".react-datepicker__day--020:not(.react-datepicker__day--outside-month)").click();
+        $("#subjectsInput").setValue("English").pressEnter();
+        $("#hobbiesWrapper").$(byText("Reading")).click();
+        $("#uploadPicture").uploadFromClasspath("test-picture.jpg");
         $("#currentAddress").setValue("some address");
         $("#state").scrollIntoView(true).click();
-        $(byText("NCR")).click();
+        $("#stateCity-wrapper").$(byText("NCR")).click();
         $("#city").click();
-        $(byText("Noida")).click();
+        $("#stateCity-wrapper").$(byText("Noida")).click();
         $("#submit").click();
 
         $(byText("Thanks for submitting the form")).shouldBe(visible);
-        $(byXpath("//*[@class='modal-content']//tr[1]//td[2]")).shouldHave(text("Nikolai Patrakov"));
-        $(byXpath("//*[@class='modal-content']//tr[2]//td[2]")).shouldHave(text("testguru@auto.com"));
-        $(byXpath("//*[@class='modal-content']//tr[3]//td[2]")).shouldHave(text("Male"));
-        $(byXpath("//*[@class='modal-content']//tr[4]//td[2]")).shouldHave(text("0123456789"));
-        $(byXpath("//*[@class='modal-content']//tr[5]//td[2]")).shouldHave(text("20 March,1991"));
-        $(byXpath("//*[@class='modal-content']//tr[6]//td[2]")).shouldHave(text("English"));
-        $(byXpath("//*[@class='modal-content']//tr[7]//td[2]")).shouldHave(text("Reading"));
-        $(byXpath("//*[@class='modal-content']//tr[8]//td[2]")).shouldHave(text("test-picture.jpg"));
-        $(byXpath("//*[@class='modal-content']//tr[9]//td[2]")).shouldHave(text("some address"));
-        $(byXpath("//*[@class='modal-content']//tr[10]//td[2]")).shouldHave(text("NCR Noida"));
+
+        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Nikolai Patrakov"));
+        $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text("testguru@auto.com"));
+        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Male"));
+        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("0123456789"));
+        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("20 March,1991"));
+        $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text("English"));
+        $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text("Reading"));
+        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("test-picture.jpg"));
+        $(".table-responsive").$(byText("Address")).parent().shouldHave(text("some address"));
+        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("NCR Noida"));
     }
 }

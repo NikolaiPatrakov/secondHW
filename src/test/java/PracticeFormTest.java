@@ -26,9 +26,9 @@ public class PracticeFormTest {
         $("#genterWrapper").$(byText(genderOption)).click();
         $("#userNumber").setValue(userMobileNumber);
         $("#dateOfBirthInput").click();
-        $("[class=react-datepicker__month-select]").selectOptionByValue(dateOfBirthMonthOption);
+        $("[class=react-datepicker__month-select]").selectOption(dateOfBirthMonthOption);
         $("[class=react-datepicker__year-select]").selectOptionByValue(dateOfBirthYearOption);
-        $(".react-datepicker__day--020:not(.react-datepicker__day--outside-month)").click();
+        $("[class=react-datepicker__month]").$(byText(dateOfBirthDayOption)).click();
         $("#subjectsInput").setValue(subjectOption).pressEnter();
         $("#hobbiesWrapper").$(byText(hobbiesOption)).click();
         $("#uploadPicture").uploadFromClasspath("test-picture.jpg");
@@ -46,7 +46,8 @@ public class PracticeFormTest {
         $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text(userEmail));
         $(".table-responsive").$(byText("Gender")).parent().shouldHave(text(genderOption));
         $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(userMobileNumber));
-        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text(fullDateOfBirth));
+        $(".table-responsive").$(byText("Date of Birth"))
+                .parent().shouldHave(text(dateOfBirthDayOption + " " + dateOfBirthMonthOption + "," + dateOfBirthYearOption));
         $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text(subjectOption));
         $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text(hobbiesOption));
         $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("test-picture.jpg"));

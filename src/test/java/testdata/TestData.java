@@ -6,9 +6,9 @@ public class TestData {
     public static String userEmail = "testguru@auto.com";
     public static String genderOption = "Male";
     public static String userMobileNumber = "0123456789";
-    public static String dateOfBirthMonthOption = "2";
+    public static String dateOfBirthMonthOption = "March";
     public static String dateOfBirthYearOption = "1991";
-    public static String fullDateOfBirth = "20 March,1991";
+    public static String dateOfBirthDayOption = "20";
     public static String subjectOption = "English";
     public static String hobbiesOption = "Reading";
     public static String currentAddress = "some address";
